@@ -1,6 +1,6 @@
 # RadAdapt | ACL BioNLP 2023 (oral)
 
-Official implementation of RadAdapt from Stanford University.<br>
+Official implementation of RadAdapt from Stanford University<br>
 - <b> Title: </b>[RadAdapt: Radiology Report Summarization via Lightweight
 Domain Adaptation of Large Language Models](https://arxiv.org/pdf/2305.01146.pdf)<br>
 - <b>Authors: </b>[Dave Van Veen\*](https://davevanveen.com/), [Cara Van Uden\*](https://caravanuden.com/), Maayane Attias, Anuj Pareek, Christian Bluethgen, Malgorzata Polacin, Wah Chiu, Jean-Benoit Delbrouck, Juan Manuel Zambrano Chaves, Curtis P. Langlotz, Akshay S. Chaudhari, John Pauly<br>
