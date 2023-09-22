@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<!-- <script src="http://www.google.com/jsapi" type="text/javascript"></script> 
+<script type="text/javascript">google.load("jquery", "1.3.2");</script> -->
+<link rel="stylesheet" href="./resources/js/simpleLightbox.min.css">
+<script src="./resources/js/simpleLightbox.min.js"></script>
+<style type="text/css">
+	body {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		font-weight:300;
+		font-size:18px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 1100px;
+	}
+	
+	h1 {
+		font-size:32px;
+		font-weight:300;
+	}
+	
+	.disclaimerbox {
+		background-color: #eee;		
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+		padding: 20px;
+	}
+
+	video.header-vid {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	img.header-img {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	img.rounded {
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	a:link,a:visited
+	{
+		color: #1367a7;
+		text-decoration: none;
+	}
+	a:hover {
+		color: #208799;
+	}
+	
+	td.dl-link {
+		height: 160px;
+		text-align: center;
+		font-size: 22px;
+	}
+	
+	.layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+		15px 15px 0 0px #fff, /* The fourth layer */
+		15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+		20px 20px 0 0px #fff, /* The fifth layer */
+		20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+		25px 25px 0 0px #fff, /* The fifth layer */
+		25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+	.paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35); /* The top layer shadow */
+
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+
+	.layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+		margin-top: 5px;
+		margin-left: 10px;
+		margin-right: 30px;
+		margin-bottom: 5px;
+	}
+	
+	.vert-cent {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	
+	hr
+	{
+		border: 0;
+		height: 1px;
+		background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+	}
+
+	* {box-sizing: border-box;}
+
+	.img-magnifier-container {
+	position: relative;
+	}
+
+	.img-magnifier-glass {
+	position: absolute;
+	border: 3px solid #000;
+	border-radius: 50%;
+	cursor: none;
+	/*Set the size of the magnifier glass:*/
+	width: 300px;
+	height: 300px;
+	}
+</style>
+
+<html>
+<head>
+	<title>Clinical Text Summarization: Adapting Large Language Models Can Outperform Human Experts</title>
+	<meta property="og:image" content="resources/teaser.png"/>
+	<meta property="og:title" content="RadAdapt: Radiology Report Summarization via Lightweight Domain Adaptation of Large Language Models" />
+	<meta property="og:description" content="Adapting LLMs to summarize radiology reports." />
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'G-SM533FK505');
+	</script>
+	<script>
+		/* https://github.com/dbrekalo/simpleLightbox */
+		function createLigthboxGallery() {
+			new SimpleLightbox({elements: '.ImageGallery a'})
+		}
+	</script>
+</head>
+
+<body onload="createLigthboxGallery();">
+	<br>
+	<center>
+		<span style="font-size:36px">
+			Clinical Text Summarization: Adapting Large <br /> Language Models Can Outperform Human Experts
+		</span>
+		</br></br>
+		
+		<table align=center width=600px>
+			<table align=center width=600px>				
+				
+                <tr style="font-size: 14px", style="padding: 30px 0;">
+					<td align=center width=120px >
+						<center>
+						<span><a href="https://davevanveen.com/">Dave<br />Van Veen</a>*</span>
+						</center>
+					</td>
+					<td align=center width=120px >
+						<center>
+						<span><a href="https://caravanuden.com/">Cara<br />Van Uden</a>*</span>
+						</center>
+					</td>
+					<td align=center width=120px >
+						<center>
+						<span><a href="https://www.linkedin.com/in/maayaneattias/">Maayane<br />Attias</a></span>
+						</center>
+					</td>
+					<td align=center width=120px >
+						<center>
+						<span><a href="https://www.linkedin.com/in/anujpareek-md/?originalSubdomain=dk">Anuj<br />Pareek</a></span>
+						</center>
+					</td>
+				</tr>
+			
+                <tr style="font-size: 14px">
+					<td align=center width=120px >
+						<center>
+						<span><a href="https://www.linkedin.com/in/bluethgen/">Christian<br />Bluethgen</a></span>
+						</center>
+					</td>
+					<td align=center width=120px >
+						<center>
+						<span><a href="https://stanford.edu/">Malgorzata<br />Polacin</a></span>
+						</center>
+					</td>
+					<td align=center width=120px >
+						<center>
+						<span><a href="https://profiles.stanford.edu/wah-chiu">Wah<br />Chiu</a></span>
+						</center>
+					</td>
+					<td align=center width=120px >
+						<center>
+						<span><a href="https://jbdel.github.io">Jean-Benoit<br />Delbrouck</a></span>
+						</center>
+					</td>
+				</tr>
+
+				<tr style="font-size: 14px">
+					<td align=center width=120px >
+						<center>
+						<span><a href="https://www.linkedin.com/in/juanmzambrano/">Juan M.Z.<br />Chaves</a></span>
+						</center>
+					</td>
+					<td align=center width=120px >
+						<center>
+						<span><a href="https://profiles.stanford.edu/curtis-langlotz">Curtis P.<br />Langlotz</a></span>
+						</center>
+					</td>
+					<td align=center width=120px>
+						<center>
+							<span><a href="https://profiles.stanford.edu/akshay-chaudhari">Akshay<br />Chaudhari</a></span>
+						</center>
+					</td>
+					<td align=center width=120px >
+						<center>
+						<span><a href="https://web.stanford.edu/~pauly/">John<br />Pauly</a></span>
+						</center>
+					</td>
+				</tr>
+
+			</table>
+		<p style="font-size: 14px">
+		<span style="text-align: center;">Stanford University</span>
+		</br></p>
+		</br></br></br>
+		<table align=center width=850px>
+			<tr>
+				<td width=260px>
+					<center>
+						<img class="round" style="width:800px; border: 0px;" src="resources/teaser.png"/>
+					</center>
+				</td>
+			</tr>
+		</table>
+		<br>
+			<table align=center width=250px>
+				<tr>
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:24px"><a href='https://arxiv.org/abs/2305.01146'>[Paper]</a></span>
+						</center>
+					</td>
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:24px"><a href='resources/bibtex.txt'>[BibTeX]</a></span><br>
+						</center>
+					</td>
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:24px"><a href='https://github.com/davevanveen/radadapt'>[Code]</a></span><br>
+						</center>
+					</td>
+				</tr>
+			</table>
+		</table>
+	</center>
+
+	<center>
+
+		<table align=center width=850px>
+			<tr>
+				<td>
+					
+				</td>
+			</tr>
+		</table>
+	</center>
+
+    <br>
+	<hr>
+    <br>
+
+	<table align=center width=850px>
+		<center><h1>Abstract</h1></center>
+		<tr>
+			<td style='text-align: justify;'>
+                <p>We systematically investigate lightweight strategies to adapt large language models (LLMs) for the task of radiology report summarization (RRS). Specifically, we focus on domain adaptation via pretraining (on natural language, biomedical text, or clinical text) and via discrete prompting or parameter-efficient fine-tuning.</p>
+                <p>Our results consistently achieve best performance by maximally adapting to the task via pretraining on clinical text and fine-tuning on RRS examples. Importantly, this method fine-tunes a mere 0.32% of parameters throughout the model, in contrast to end-to-end fine-tuning (100% of parameters). Additionally, we study the effect of in-context examples and out-of-distribution (OOD) training before concluding with a radiologist reader study and qualitative analysis.</p>
+                <p>This research highlights the importance of domain adaptation in RRS and provide valuable insights toward developing effective natural language processing solutions for clinical tasks.</p>
+			</td>
+		</tr>
+	</table>
+	<br>
+
+
+    <br>
+    <hr>
+    <br>
+
+	<br>
+	<table align=center width=400px>
+		<tr>
+			<td align=center width=400px >
+				<center >
+					<td class="img-magnifier-container"><img id="myimage" style="width:800px" src="resources/reader_study.png"/></td>
+				</center>
+			</td>
+		</tr>
+	</table>
+
+	<table align=center width=800px>
+		<tr>
+			<td align=left width=800px>
+                Example radiology report. <b>Left</b>: Findings and reference impression. <b>Right</b>: Generated impressions with various methods for discrete prompting (top) and parameter-efficient fine-tuning (bottom), all using the CLIN-T5 model. Color annotations were provided by a radiologist who specializes in the relevant anatomy (head).
+			</td>
+		</tr>
+	</table>
+	<br>
+
+
+    <br>
+    <hr>
+    <br>
+
+	<br>
+	<table align=center width=400px>
+		<tr>
+			<td align=center width=400px >
+				<center >
+					<td class="img-magnifier-container"><img id="myimage" style="width:800px" src="resources/adaptation.png"/></td>
+				</center>
+			</td>
+		</tr>
+	</table>
+
+	<table align=center width=800px>
+		<tr>
+			<td align=left width=800px>
+                    Domain adaptation. <b>Left</b>: Adaptation via pretraining on increasingly relevant data (T5, SCIFIVE, CLIN- T5-SCI, CLIN-T5) generally leads to improved performance for both fine-tuning methods. See Table 5 in the appendix for comprehensive results. <b>Right</b>: Adaptation via increasing number of in-context examples leads to improved performance in most models.
+			</td>
+		</tr>
+	</table>
+	<br>
+
+
+    <br>
+    <hr>
+    <br>
+
+	<br>
+	<table align=center width=400px>
+		<tr>
+			<td align=center width=400px >
+				<center >
+					<td class="img-magnifier-container"><img id="myimage" style="width:600px" src="resources/reader_study.png"/></td>
+				</center>
+			</td>
+		</tr>
+	</table>
+
+	<table align=center width=800px>
+		<tr>
+			<td align=left width=800px>
+                Radiology reader study. <b>Top</b>: Study design. <b>Bottom</b>: Results via CLIN-T5 + LoRA on random samples from the CT head dataset. The model scores highest in coherence (Q3) and generally performs well capturing critical information (Q1) in a factually correct way (Q2). Each entry’s highlight color corresponds to its location on the color spectrum.
+			</td>
+		</tr>
+	</table>
+	<br>
+
+
+    <br>
+    <hr>
+    <br>
+
+
+	<br>
+	<table align=center width=400px>
+		<tr>
+			<td align=center width=400px >
+				<center >
+					<td class="img-magnifier-container"><img id="myimage" style="width:700px" src="resources/freq_plot.png"/></td>
+				</center>
+			</td>
+		</tr>
+	</table>
+
+	<table align=center width=800px>
+		<tr>
+			<td align=left width=800px>
+                    Distribution of reader scores for each summarization task across evaluated attributes (completeness, correctness, conciseness). Horizontal axes denote reader preference between GPT-4 and human summaries as measured by a five-point Likert scale. Vertical axes denote frequency count, with 900 total reports for each plot. GPT-4 summaries are more often preferred in terms of correctness and completeness. While the largest gain in correctness occurs on radiology reports, this introduces a trade-off with conciseness.
+			</td>
+		</tr>
+	</table>
+	<br>
+
+
+    <br>
+	<hr>
+    <br>
+
+
+	<table align=center width=550px>
+		<center><h1>Paper</h1></center>
+		<tr>
+			<td><a href="https://arxiv.org/abs/2309.07430"><img class="layered-paper-big" style="height:175px" src="resources/thumbnail.png"/></a></td>
+			<td><span style="font-size:14pt">D. Van Veen*, C. Van Uden*, M. Attias,<br />A. Pareek, C. Bluethgen, M. Polacin,<br />W. Chiu, J.B. Delbrouck, J.M.Z. Chaves,<br />C.P. Langlotz, A.S. Chaudhari, J. Pauly<br>
+				<b>RadAdapt: Radiology Report Summarization via Lightweight Domain Adaptation of Large Language Models</b><br>
+				2023. (hosted on <a href="https://arxiv.org/pdf/2305.01146.pdf">ArXiv</a>)<br>
+				<span style="font-size:4pt"><a href=""><br></a>
+				</span>
+			</td>
+		</tr>
+	</table>
+	<br>
+
+	<table align=center width=600px>
+		<tr>
+			<td><span style="font-size:14pt"><center><a href="resources/bibtex.txt">[Bibtex]</a></center></td>
+		</tr>
+	</table>
+
+	<br>
+	<hr>
+	<br>
+
+	<table align=center width=900px>
+		<tr>
+			<td width=400px>
+				<left>
+					<center><h1>Acknowledgements</h1></center>
+					<p style="text-align: justify;">
+                This work is a continuation of the radiology report summarization track at ACL BioNLP. We received support from NIH con- tracts 75N92020C00008 and 75N92020C00021.
+					</p>
+				</left>
+			</td>
+		</tr>
+	</table>
+
+<br>
+<br>
+<hr>
+
+<center><span style="font-size: 10px; text-align: center;">This template was originally created by <a href="http://web.mit.edu/phillipi/">Phillip Isola</a> and <a href="http://richzhang.github.io/">Richard Zhang</a> for a <a href="http://richzhang.github.io/colorization/">colorful</a> ECCV project; the code can be found <a href="https://github.com/richzhang/webpage-template">here</a>.<br></span></center>
+<br />
+</body>
+</html>
+

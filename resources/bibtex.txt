@@ -1,0 +1,6 @@
+@article{van2023radadapt,
+  title={RadAdapt: Radiology Report Summarization via Lightweight Domain Adaptation of Large Language Models},
+  author={Van Veen, Dave and Van Uden, Cara and Attias, Maayane and Pareek, Anuj and Bluethgen, Christian and Polacin, Malgorzata and Chiu, Wah and Delbrouck, Jean-Benoit and Chaves, Juan Manuel Zambrano and Langlotz, Curtis P and others},
+  journal={arXiv preprint arXiv:2305.01146},
+  year={2023}
+}
